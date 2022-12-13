@@ -1,0 +1,10 @@
+export const USER_ACTION_TYPES = {
+  //Cart
+  USERS_CART: 'user/USERS_CART',
+  Add_To_Cart: 'user/ADD_TO_Cart',
+
+  //Login
+  USER_LOGIN_START: 'user/USER_LOGIN_START',
+  USER_LOGIN_SUCCESS: 'user/USER_LOGIN_SUCCESS',
+  USER_LOGIN_FAILED: 'user/USER_LOGIN_FAILED',
+};
