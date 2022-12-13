@@ -27,6 +27,7 @@ const ProductPage = () => {
   const [productData, setproductData] = useState([]);
 
   useEffect(() => {
+    // await
     axios
       .get('https://fakestoreapi.com/products')
       .then((res) => {
@@ -37,9 +38,9 @@ const ProductPage = () => {
       });
   }, []);
 
-  const addCartHandler = () => {
+  const addCartHandler = (post) => {
     
-    dispatch(addtocart((productData)))
+    dispatch(addtocart((post)))
   };
 
 
@@ -66,7 +67,7 @@ const ProductPage = () => {
               <p>Price: {post.price}</p>
               <button
                 className='bg-blue-700 px-2 py-1'
-                onClick={addCartHandler}
+                onClick={()=>addCartHandler(post)}
               >
                 Add to cart
               </button>

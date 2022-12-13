@@ -38,8 +38,8 @@ const LogInPage = () => {
   //   userLoginStartAsync((Data(inputId))))
   dispatch(
     userLoginStartAsync({
-      // :
-      // :
+      identifier : inputId,
+      password :inputPassword
     })
   );
   };
@@ -89,7 +89,7 @@ const LogInPage = () => {
         </div>
         <div>
           <button className='bg-red-700 h-10 w-60 ' onClick={check}>
-            Log In My Account
+            {list.loading?'loading':'Log In My Account'}
           </button>
         </div>
       </div>

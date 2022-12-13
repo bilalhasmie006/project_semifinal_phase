@@ -10,14 +10,14 @@ import {
 } from '../store/user/user.action';
 
 const CartPage = () => {
-  const cart = useSelector((state) => state.user);
+  const {list} = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
-  //setproductData(cart.list};
+  setproductData(cart.list};
 
   return (
     <div>
-      {console.log("id"+ cart.list.title)}
+      {console.log("id"+ cart.list[0].title)}
     {productData.map((post) => {
       const { id, title, price, description, image } = post;
       return (

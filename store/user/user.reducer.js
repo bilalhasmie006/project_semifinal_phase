@@ -2,16 +2,16 @@ import { userscart } from './user.action';
 import { USER_ACTION_TYPES } from './user.types';
 
 const INITIAL_STATE = {
-  user: 'bilal',
+  user: null,
   error: false,
   message: false,
   loading: false,
   list:[
     {
-        id: 1,
-        title: 'doctor required',
-        price: 'feb 5th at  2.30pm',
-        description: 'true',
+        id: '',
+        title: '',
+        price: '',
+        description: '',
         image: '',
     },
   ]
@@ -22,10 +22,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case USER_ACTION_TYPES.Add_To_Cart:
-      return {
+      {
+        //calculation: check(if quaantity)
+        return {
         ...state,
-        list: payload,
-      };
+        list: [...state.list,payload], // append ho jae ga
+      }}
       // case USER_ACTION_TYPES.USERS_CART:
       // return {
       //   ...state,
@@ -34,12 +36,15 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.USER_LOGIN_START:
       return {
         ...state,
+        error: false,
+        message: false,
         loading: true,
       };
 
     case USER_ACTION_TYPES.USER_LOGIN_SUCCESS:
       return {
         ...state,
+    
         loading: false,
         message: payload.message,
         user: payload.data,

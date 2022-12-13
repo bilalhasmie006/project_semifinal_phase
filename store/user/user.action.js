@@ -31,7 +31,7 @@ export const userLoginStartAsync = (data) => {
         })
       );
     } catch (error) {
-      dispatch(userLoginFailed(data.message));
+      dispatch(userLoginFailed(error.message));
     }
   };
 };
