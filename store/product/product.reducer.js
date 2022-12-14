@@ -1,53 +1,51 @@
-import { userscart } from './user.action';
-import { USER_ACTION_TYPES } from './user.types';
+
+import { PRODUCT_ACTION_TYPES } from './product.types';
 
 const INITIAL_STATE = {
   user: null,
   error: false,
   message: false,
   loading: false,
-  list:[]
+  list:[],
+  // data: [],
+  // loading: false,
+  // error: false,
 };
 
 export const productReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case USER_ACTION_TYPES.PRODUCT_SCRAP_START:
+    case PRODUCT_ACTION_TYPES.PRODUCT_SCRAP_START:
       {
         //calculation: check(if quaantity)
         return {
-        ...state,
-        list: [...state.list,payload], // append ho jae ga
+          ...state,
+          error: false,
+          message: false,
+          loading: true,
       }}
-      // case USER_ACTION_TYPES.USERS_CART:
+      // case PRODUCT_ACTION_TYPES.USERS_CART:
       // return {
       //   ...state,
       
       // };
-    case USER_ACTION_TYPES.USER_LOGIN_START:
-      return {
-        ...state,
-        error: false,
-        message: false,
-        loading: true,
-      };
-
-    case USER_ACTION_TYPES.USER_LOGIN_SUCCESS:
+   
+    case PRODUCT_ACTION_TYPES.PRODUCT_SCRAP_SUCCESS:
       return {
         ...state,
     
         loading: false,
-        message: payload.message,
-        user: payload.data,
+        // message: payload.status,
+        list: payload,
       };
 
-    case USER_ACTION_TYPES.USER_LOGIN_FAILED:
+    case PRODUCT_ACTION_TYPES.PRODUCT_SCRAP_FAILED:
       return {
         ...state,
         loading: false,
-        message: payload,
-        error: true,
+        error: payload,
+       
       };
 
     default:

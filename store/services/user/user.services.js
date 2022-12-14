@@ -2,7 +2,7 @@ export const login = ( {identifier, password }) => {
   return new Promise((resolve, reject) => {
     console.log("running");
     setTimeout(() => {
-      if (identifier === 'bilal@gmail.com' && password === 'asd123') {
+      if (identifier === 'bilal' && password === '123') {
         resolve({
           status: true,
           data: {

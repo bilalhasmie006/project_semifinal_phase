@@ -13,7 +13,7 @@ const CartPage = () => {
   const {list} = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
-  setproductData(cart.list};
+  // setproductData(cart.list};
 
   return (
     <div>

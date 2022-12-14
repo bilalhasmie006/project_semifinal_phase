@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
+import { selectUserReducer } from '../store/user/user.selector'
 function UserLayout({ childern }) {
 
 
@@ -11,7 +11,7 @@ function UserLayout({ childern }) {
   useEffect(()=>{
 
     if(!user?.username && !loading){
-router.push('/login')
+router.push('/LoginPage')
     }
 
   },[user?.username,loading])

@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
-
-import {
-  // userLoginStart,
-  // userLoginSuccess,
-  // userLoginFailure,
-  addtocart,
-} from '../store/user/user.action';
+import UserLayout from '../layout/userLayout';
+import {selectProductReducer} from '../store/product/product.selector'
+import { productScrapAsync } from '../store/product/product.action'
+//   // userLoginStart,
+//   // userLoginSuccess,
+//   // userLoginFailure,
+//   addtocart,
+// } from '../store/user/user.action';
 
 
 
@@ -22,22 +23,36 @@ const ProductPage = () => {
   //       });
   //     console.log(response.data);
   //   };
-  const list = useSelector((state) => state.user);
+  // const list = useSelector((state) => state.user);
+  const {list} = useSelector(selectProductReducer);
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
 
-  useEffect(() => {
-    // await
-    axios
-      .get('https://fakestoreapi.com/products')
-      .then((res) => {
-        setproductData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // await
+  //   axios
+  //     .get('https://fakestoreapi.com/products')
+  //     .then((res) => {
+  //       setproductData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
+  // useEffect(() => {
+    const check = () => {
+    dispatch(
+      productScrapAsync()
+    );
+  };
+    
+  useEffect(() => {
+        console.log("gunddd" + list);
+        setproductData(list);
+   }, [list]);
+
+  
   const addCartHandler = (post) => {
     
     dispatch(addtocart((post)))
@@ -45,11 +60,15 @@ const ProductPage = () => {
 
 
   return (
-    <UserLayout>
+    // <UserLayout>
     <div>
       <div className='flex justify-center text-[30px] font-bold'>
         Product List
       </div>
+      <button className='bg-red-700 h-10 w-60 ' onClick={check}>
+            {/* {loading?'loading':'Log In My Account'} */}
+            you want to see products
+          </button>
       {productData.map((post) => {
         const { id, title, price, description, image } = post;
 
@@ -72,12 +91,14 @@ const ProductPage = () => {
               >
                 Add to cart
               </button>
+             
+
             </div>
           </div>
         );
       })}
     </div>
-    </UserLayout>
+    // </UserLayout> 
   );
 };
 

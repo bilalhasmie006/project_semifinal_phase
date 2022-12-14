@@ -1,4 +1,4 @@
-export const USER_ACTION_TYPES = {
+export const PRODUCT_ACTION_TYPES = {
   // //Cart
   // USERS_CART: 'user/USERS_CART',
   // Add_To_Cart: 'user/ADD_TO_Cart',

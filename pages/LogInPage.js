@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../store/services/user/user.services';
-import selectUserReducer from '/store/user/user.selector';
+import { selectUserReducer } from '../store/user/user.selector';
 
 import {
   // userLoginStart,
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 const LogInPage = () => {
   const [inputId, setinputId] = useState('');
   const [inputPassword, setinputPassword] = useState('');
-  const {user,loading} = useSelector(selectUserReducer);
+  const { user,loading } = useSelector(selectUserReducer);
   const router=useRouter()
   const dispatch = useDispatch();
   // const { user, error, message, loading } = useSelector(selectUserReducer);
@@ -26,10 +26,12 @@ const LogInPage = () => {
   useEffect(()=>{
 
     if(user?.username){
-      router.push('/product')
+      router.push('/ProductPage')
     }
 
   },[loading,user?.username])
+
+
   const check = () => {
     console.log("button is working")
 
@@ -95,11 +97,12 @@ const LogInPage = () => {
             placeholder='Enter Your Password '
             onChange={(e) => {setinputPassword(e.target.value)}}
           ></input>
-          <h1>{console.log("loading"+ list.loading)}</h1>
+          {/* <h1>{loading}</h1> */}
         </div>
         <div>
           <button className='bg-red-700 h-10 w-60 ' onClick={check}>
-            {list.loading?'loading':'Log In My Account'}
+            {/* {loading?'loading':'Log In My Account'} */}
+            Log In My Account
           </button>
         </div>
       </div>
