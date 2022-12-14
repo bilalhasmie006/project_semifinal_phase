@@ -6,33 +6,16 @@ const INITIAL_STATE = {
   error: false,
   message: false,
   loading: false,
-  list:[
-    {
-        id: '',
-        title: '',
-        price: '',
-        description: '',
-        image: '',
-    },
-  ]
+  list:[]
 };
 
-export const userReducer = (state = INITIAL_STATE, action) => {
+export const productReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case USER_ACTION_TYPES.Add_To_Cart:
+    case USER_ACTION_TYPES.PRODUCT_SCRAP_START:
       {
         //calculation: check(if quaantity)
-
-        // let lengthCurrentCart = state.user.list.map((cartItem)=>(cartItem.id===payload.id)).length;
-        // let newCart=[];
-
-        // if(lengthCurrentCart>0){
-        //   newCart=state.user.list.filter((cartItem)=>(cartItem.id!==payload.id));
-        //   let currentItem={...payload,quantinty:}
-        // }
-        // if(state.user.list.map(x=>x.id===payload.id).length>0)
         return {
         ...state,
         list: [...state.list,payload], // append ho jae ga

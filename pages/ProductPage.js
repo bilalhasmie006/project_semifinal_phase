@@ -45,6 +45,7 @@ const ProductPage = () => {
 
 
   return (
+    <UserLayout>
     <div>
       <div className='flex justify-center text-[30px] font-bold'>
         Product List
@@ -76,6 +77,7 @@ const ProductPage = () => {
         );
       })}
     </div>
+    </UserLayout>
   );
 };
 

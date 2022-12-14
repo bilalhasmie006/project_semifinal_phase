@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../store/services/user/user.services';
-// import selectUserReducer from '/store/user/user.selector';
+import selectUserReducer from '/store/user/user.selector';
 
 import {
   // userLoginStart,
@@ -10,16 +10,26 @@ import {
   // userLoginFailure,
   userLoginStartAsync,
 } from '../store/user/user.action';
-
+import { useRouter } from 'next/router';
 
 
 
 const LogInPage = () => {
   const [inputId, setinputId] = useState('');
   const [inputPassword, setinputPassword] = useState('');
-  const list = useSelector((state) => state.user);
+  const {user,loading} = useSelector(selectUserReducer);
+  const router=useRouter()
   const dispatch = useDispatch();
   // const { user, error, message, loading } = useSelector(selectUserReducer);
+
+
+  useEffect(()=>{
+
+    if(user?.username){
+      router.push('/product')
+    }
+
+  },[loading,user?.username])
   const check = () => {
     console.log("button is working")
 
