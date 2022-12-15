@@ -6,42 +6,34 @@ const INITIAL_STATE = {
   error: false,
   message: false,
   loading: false,
-  list:[
-    {
-        id: '',
-        title: '',
-        price: '',
-        description: '',
-        image: '',
-    },
-  ]
+  list: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case USER_ACTION_TYPES.Add_To_Cart:
-      {
-        //calculation: check(if quaantity)
+    case USER_ACTION_TYPES.Add_To_Cart: {
+      //calculation: check(if quaantity)
 
-        // let lengthCurrentCart = state.user.list.map((cartItem)=>(cartItem.id===payload.id)).length;
-        // let newCart=[];
+      // let lengthCurrentCart = state.user.list.map((cartItem)=>(cartItem.id===payload.id)).length;
+      // let newCart=[];
 
-        // if(lengthCurrentCart>0){
-        //   newCart=state.user.list.filter((cartItem)=>(cartItem.id!==payload.id));
-        //   let currentItem={...payload,quantinty:}
-        // }
-        // if(state.user.list.map(x=>x.id===payload.id).length>0)
-        return {
+      // if(lengthCurrentCart>0){
+      //   newCart=state.user.list.filter((cartItem)=>(cartItem.id!==payload.id));
+      //   let currentItem={...payload,quantinty:}
+      // }
+      // if(state.user.list.map(x=>x.id===payload.id).length>0)
+      return {
         ...state,
-        list: [...state.list,payload], // append ho jae ga
-      }}
-      // case USER_ACTION_TYPES.USERS_CART:
-      // return {
-      //   ...state,
-      
-      // };
+        list: [...state.list, payload], // append ho jae ga
+      };
+    }
+    // case USER_ACTION_TYPES.USERS_CART:
+    // return {
+    //   ...state,
+
+    // };
     case USER_ACTION_TYPES.USER_LOGIN_START:
       return {
         ...state,
@@ -53,7 +45,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.USER_LOGIN_SUCCESS:
       return {
         ...state,
-    
+
         loading: false,
         message: payload.message,
         user: payload.data,

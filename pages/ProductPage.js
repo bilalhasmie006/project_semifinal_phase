@@ -4,15 +4,14 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import UserLayout from '../layout/userLayout';
-import {selectProductReducer} from '../store/product/product.selector'
-import { productScrapAsync } from '../store/product/product.action'
+import { selectProductReducer } from '../store/product/product.selector';
+import { productScrapAsync } from '../store/product/product.action';
+import { addtocart } from '../store/user/user.action';
 //   // userLoginStart,
 //   // userLoginSuccess,
 //   // userLoginFailure,
 //   addtocart,
 // } from '../store/user/user.action';
-
-
 
 const ProductPage = () => {
   //   const fetchProducts = async () => {
@@ -24,7 +23,7 @@ const ProductPage = () => {
   //     console.log(response.data);
   //   };
   // const list = useSelector((state) => state.user);
-  const {list} = useSelector(selectProductReducer);
+  const { list } = useSelector(selectProductReducer);
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
 
@@ -40,24 +39,17 @@ const ProductPage = () => {
   //     });
   // }, []);
 
-  // useEffect(() => {
-    const check = () => {
-    dispatch(
-      productScrapAsync()
-    );
-  };
-    
   useEffect(() => {
-        console.log("gunddd" + list);
-        setproductData(list);
-   }, [list]);
+    dispatch(productScrapAsync());
+  }, []);
 
-  
+  useEffect(() => {
+    setproductData(list);
+  }, [list]);
+
   const addCartHandler = (post) => {
-    
-    dispatch(addtocart((post)))
+    dispatch(addtocart(post));
   };
-
 
   return (
     // <UserLayout>
@@ -65,16 +57,16 @@ const ProductPage = () => {
       <div className='flex justify-center text-[30px] font-bold'>
         Product List
       </div>
-      <button className='bg-red-700 h-10 w-60 ' onClick={check}>
-            {/* {loading?'loading':'Log In My Account'} */}
+      {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
+            {loading?'loading':'Log In My Account'}
             you want to see products
-          </button>
+          </button> */}
       {productData.map((post) => {
         const { id, title, price, description, image } = post;
 
         // const addCartHandler = () => {
         //   console.log('Product is', post.id, 'has title', post.title);
-          
+
         //   // dispatch(userscart((productData)))
         // };
 
@@ -87,18 +79,16 @@ const ProductPage = () => {
               <p>Price: {post.price}</p>
               <button
                 className='bg-blue-700 px-2 py-1'
-                onClick={()=>addCartHandler(post)}
+                onClick={() => addCartHandler(post)}
               >
                 Add to cart
               </button>
-             
-
             </div>
           </div>
         );
       })}
     </div>
-    // </UserLayout> 
+    // </UserLayout>
   );
 };
 
