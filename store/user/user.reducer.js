@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   error: false,
   message: false,
   loading: false,
-  list: [],
+  cartlist: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -24,10 +24,19 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       //   let currentItem={...payload,quantinty:}
       // }
       // if(state.user.list.map(x=>x.id===payload.id).length>0)
+// if(payload.id===cartlist.id){
+//   return {
+//     ...state,
+//     cartlist: [...state.cartlist, cartlist[id].quantity+1], // append ho jae ga
+//   };
+
+
+
       return {
         ...state,
-        list: [...state.list, payload], // append ho jae ga
+        cartlist: [...state.cartlist, payload], // append ho jae ga
       };
+    
     }
     // case USER_ACTION_TYPES.USERS_CART:
     // return {

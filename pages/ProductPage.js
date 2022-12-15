@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import UserLayout from '../layout/userLayout';
 import { selectProductReducer } from '../store/product/product.selector';
+import { selectUserReducer } from '../store/user/user.selector';
 import { productScrapAsync } from '../store/product/product.action';
 import { addtocart } from '../store/user/user.action';
 //   // userLoginStart,
@@ -26,6 +27,12 @@ const ProductPage = () => {
   const { list } = useSelector(selectProductReducer);
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
+  const [listData, setlistData] = useState([]);
+//experiment:
+const { cartlist } = useSelector(selectUserReducer);
+
+
+
 
   // useEffect(() => {
   //   // await
@@ -38,6 +45,9 @@ const ProductPage = () => {
   //       console.log(err);
   //     });
   // }, []);
+  useEffect(() => {
+     setlistData(cartlist);
+  }, [cartlist]);
 
   useEffect(() => {
     dispatch(productScrapAsync());
@@ -62,7 +72,7 @@ const ProductPage = () => {
             you want to see products
           </button> */}
       {productData.map((post) => {
-        const { id, title, price, description, image } = post;
+        const { id, title, price, description } = post;
 
         // const addCartHandler = () => {
         //   console.log('Product is', post.id, 'has title', post.title);
@@ -87,6 +97,29 @@ const ProductPage = () => {
           </div>
         );
       })}
+
+<div className='flex justify-center text-[30px] font-bold'>
+        products added to cartList
+      </div>
+      {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
+            {loading?'loading':'Log In My Account'}
+            you want to see products
+          </button> */}
+        {listData.map((post) => {
+          const { id, title, price, description } = post;
+          return (
+            <div
+              className='container mx-auto flex flex-col gap-10 justify-center'
+              key={post.id}
+            >
+              <h1 className='text-[30px] font-bold'>Product {post.id}</h1>
+              <p>Title: {post.title}</p>
+              <p>Description: {post.description}</p>
+              <p>Price: {post.price}</p>
+            </div>
+          );
+        })}
+
     </div>
     // </UserLayout>
   );

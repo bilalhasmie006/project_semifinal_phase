@@ -21,7 +21,10 @@ const LogInPage = () => {
   const router=useRouter()
   const dispatch = useDispatch();
   // const { user, error, message, loading } = useSelector(selectUserReducer);
-
+  const { cartlist } = useSelector(selectUserReducer);
+  useEffect(() => {
+    console.log(cartlist)
+  }, [cartlist]);
 
   useEffect(()=>{
 

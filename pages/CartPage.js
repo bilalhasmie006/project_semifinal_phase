@@ -4,15 +4,21 @@ import { useEffect, useState } from 'react';
 import { selectUserReducer } from '../store/user/user.selector';
 
 const CartPage = () => {
-  const { list } = useSelector(selectUserReducer);
+  const { cartlist } = useSelector(selectUserReducer);
   //const dispatch = useDispatch();
   const [cartData, setcartData] = useState([]);
   // setproductData(cart.list};
 
   useEffect(() => {
-    setcartData(list);
-    console.log(list);
-  }, [list]);
+    setcartData(cartlist);
+    console.log(cartlist);
+  }, []);
+
+
+  useEffect(() => {
+    setcartData(cartlist);
+    console.log(cartlist);
+  }, [cartlist]);
 
   return (
     <div>
