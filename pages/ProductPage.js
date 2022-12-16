@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
-import UserLayout from '../layout/userLayout';
+import UserLayout from '../layout/UserLayout';
 import { selectProductReducer } from '../store/product/product.selector';
 import { selectUserReducer } from '../store/user/user.selector';
 import { productScrapAsync } from '../store/product/product.action';
@@ -62,7 +62,6 @@ const { cartlist } = useSelector(selectUserReducer);
   };
 
   return (
-    // <UserLayout>
     <div>
       <div className='flex justify-center text-[30px] font-bold'>
         Product List
@@ -121,8 +120,8 @@ const { cartlist } = useSelector(selectUserReducer);
         })}
 
     </div>
-    // </UserLayout>
   );
 };
 
+ProductPage.Layout=UserLayout;
 export default ProductPage;
