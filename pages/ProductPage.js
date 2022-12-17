@@ -8,6 +8,7 @@ import { selectProductReducer } from '../store/product/product.selector';
 import { selectUserReducer } from '../store/user/user.selector';
 import { productScrapAsync } from '../store/product/product.action';
 import { addtocart } from '../store/user/user.action';
+import { deleteCart } from '../store/user/user.action';
 //   // userLoginStart,
 //   // userLoginSuccess,
 //   // userLoginFailure,
@@ -45,9 +46,9 @@ const { cartlist } = useSelector(selectUserReducer);
   //       console.log(err);
   //     });
   // }, []);
-  useEffect(() => {
-     setlistData(cartlist);
-  }, [cartlist]);
+  // useEffect(() => {
+  //    setlistData(cartlist);
+  // }, [cartlist]);
 
   useEffect(() => {
     dispatch(productScrapAsync());
@@ -60,7 +61,10 @@ const { cartlist } = useSelector(selectUserReducer);
   const addCartHandler = (post) => {
     dispatch(addtocart(post));
   };
-
+  function remove(post)
+  {
+    dispatch(deleteCart(post));
+  }
   return (
     <div>
       <div className='flex justify-center text-[30px] font-bold'>
@@ -98,13 +102,16 @@ const { cartlist } = useSelector(selectUserReducer);
       })}
 
 <div className='flex justify-center text-[30px] font-bold'>
-        products added to cartList
+  <div className='flex flex-col'>
+        <h1>products added to cartList</h1>
+        <h1 className='flex justify-center text-[30px] font-bold '>Total Items:{cartlist.length}</h1>
+        </div>
       </div>
       {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
             {loading?'loading':'Log In My Account'}
             you want to see products
           </button> */}
-        {listData.map((post) => {
+        {cartlist.map((post) => {
           const { id, title, price, description } = post;
           return (
             <div
@@ -115,6 +122,7 @@ const { cartlist } = useSelector(selectUserReducer);
               <p>Title: {post.title}</p>
               <p>Description: {post.description}</p>
               <p>Price: {post.price}</p>
+              <button className='bg-blue-700 px-2 py-1' onClick={()=>remove(post.id)}>Delete</button>
             </div>
           );
         })}

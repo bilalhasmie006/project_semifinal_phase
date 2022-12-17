@@ -38,6 +38,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       };
     
     }
+    case USER_ACTION_TYPES.DELETE_CART:      
+          const data=state.cartlist.filter((e)=>e.id!==payload);
+          return{
+            ...state,
+            cartlist:data
+          }
     // case USER_ACTION_TYPES.USERS_CART:
     // return {
     //   ...state,
