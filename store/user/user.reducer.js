@@ -29,7 +29,10 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       //     ...state,
       //     cartlist: [...state.cartlist, cartlist[id].quantity+1], // append ho jae ga
       //   };
-
+      // const quantity = 0;
+      // if (payload.id == cartlist.id){
+      //   quantity =  quantity +
+      // }
       return {
         ...state,
         cartlist: [...state.cartlist, payload], // append ho jae ga
@@ -42,7 +45,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       );
       return {
         ...state,
-        cartlist: [...state, newItems],
+        cartlist: [newItems],
       };
     }
 

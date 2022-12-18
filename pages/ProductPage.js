@@ -12,11 +12,6 @@ import {
   delallfromcart,
   delfromcart,
 } from '../store/user/user.action';
-//   // userLoginStart,
-//   // userLoginSuccess,
-//   // userLoginFailure,
-//   addtocart,
-// } from '../store/user/user.action';
 
 const ProductPage = () => {
   //   const fetchProducts = async () => {
@@ -72,7 +67,7 @@ const ProductPage = () => {
 
   return (
     <div>
-      <div className='flex justify-center text-[30px] font-bold'>
+      <div className='flex justify-center text-[40px] my-2 font-bold'>
         Product List
       </div>
       {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
@@ -81,22 +76,15 @@ const ProductPage = () => {
           </button> */}
       {productData.map((post) => {
         const { id, title, price, description } = post;
-
-        // const addCartHandler = () => {
-        //   console.log('Product is', post.id, 'has title', post.title);
-
-        //   // dispatch(userscart((productData)))
-        // };
-
         return (
-          <div className='container mx-auto flex flex-col gap-10 justify-center'>
-            <div key={post.id}>
-              <h1 className='text-[30px] font-bold'>Product {post.id}</h1>
+          <div className='container mx-auto flex gap-5'>
+            <div className='w-full shadow-xl p-2' key={post.id}>
+              <h1 className='text-[30px] font-bold'>Product: {post.id}</h1>
               <p>Title: {post.title}</p>
               <p>Description: {post.description}</p>
               <p>Price: {post.price}</p>
               <button
-                className='bg-blue-700 px-2 py-1'
+                className='bg-blue-700 px-2 py-1 rounded'
                 onClick={() => addCartHandler(post)}
               >
                 Add to cart
@@ -107,43 +95,72 @@ const ProductPage = () => {
       })}
 
       <div>
-        <div className='container flex justify-center text-[30px] font-bold'>
-          products added to cartList
+        <div className='container flex justify-center text-[40px] my-2 font-bold'>
+          Products Added To CartList
         </div>
         {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
             {loading?'loading':'Log In My Account'}
             you want to see products
           </button> */}
-        {listData.map((post) => {
-          const { id, title, price, description } = post;
-          return (
-            <div
-              className='container mx-auto flex flex-col gap-5 justify-center'
-              key={post.id}
-            >
-              <h1 className='text-[30px] font-bold'>Product {post.id}</h1>
-              <p>Title: {post.title}</p>
-              <p>Description: {post.description}</p>
-              <p>Price: {post.price}</p>
-              <button
-                className='mx-auto flex bg-blue-700 px-2 py-1'
-                onClick={() => delCartHandler(post)}
-              >
-                Delete item
-              </button>
-            </div>
-          );
-        })}
+
+        <table class='container mx-auto table-auto '>
+          <thead>
+            <tr className='text-center text-[20px] flex flex-row '>
+              <th className='basis-1/4'>Product ID</th>
+              <th className='basis-1/4'>Title</th>
+              <th className='basis-1/4'>Price</th>
+              <th className='basis-1/4'>Delete From List</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listData.map((post) => {
+              const { id, title, price } = post;
+              return (
+                <div>
+                  <tr className='text-center text-[20px] flex flex-row '>
+                    <td className='basis-1/4'>{post.id}</td>
+                    <td className='basis-1/4'>{post.title}</td>
+                    <td className='basis-1/4'>{post.price}</td>
+                    <td className='basis-1/4'>
+                      <button
+                        className='mx-auto flex bg-blue-700 px-2 py-1 rounded'
+                        onClick={() => delCartHandler(post.id)}
+                      >
+                        Delete item
+                      </button>
+                    </td>
+                  </tr>
+                </div>
+              );
+            })}
+          </tbody>
+        </table>
 
         <div>
           <button
-            className='mx-auto flex bg-blue-700 px-5 py-1 my-2'
+            className='mx-auto flex bg-red-700 px-20 py-1 my-2 rounded'
             onClick={() => delallCartHandler()}
           >
             clear All Cart Items
           </button>
         </div>
       </div>
+
+      {/* <div
+              className='container mx-auto flex flex-col justify-center'
+              key={post.id}
+            >
+              <h1 className='text-[30px] font-bold'>Product: {post.id}</h1>
+              <p>Title: {post.title}</p>
+              <p>Description: {post.description}</p>
+              <p>Price: {post.price}</p>
+              <button
+                className='mx-auto flex bg-blue-700 px-2 py-1 rounded'
+                onClick={() => delCartHandler(post)}
+              >
+                Delete item
+              </button>
+            </div> */}
     </div>
   );
 };
