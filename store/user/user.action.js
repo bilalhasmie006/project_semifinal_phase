@@ -8,6 +8,12 @@ export const userscart = () => createAction(USER_ACTION_TYPES.USERS_CART);
 export const addtocart = (payload) =>
   createAction(USER_ACTION_TYPES.Add_To_Cart, payload);
 
+export const delfromcart = (payload) =>
+  createAction(USER_ACTION_TYPES.DEL_FROM_CART, payload);
+
+export const delallfromcart = (payload) =>
+  createAction(USER_ACTION_TYPES.DEL_ALL_FROM_CART);
+
 export const userLoginStart = () =>
   createAction(USER_ACTION_TYPES.USER_LOGIN_START);
 export const userLoginSuccess = (payload) =>

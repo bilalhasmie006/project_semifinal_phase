@@ -24,19 +24,33 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       //   let currentItem={...payload,quantinty:}
       // }
       // if(state.user.list.map(x=>x.id===payload.id).length>0)
-// if(payload.id===cartlist.id){
-//   return {
-//     ...state,
-//     cartlist: [...state.cartlist, cartlist[id].quantity+1], // append ho jae ga
-//   };
-
-
+      // if(payload.id===cartlist.id){
+      //   return {
+      //     ...state,
+      //     cartlist: [...state.cartlist, cartlist[id].quantity+1], // append ho jae ga
+      //   };
 
       return {
         ...state,
         cartlist: [...state.cartlist, payload], // append ho jae ga
       };
-    
+    }
+
+    case USER_ACTION_TYPES.DEL_FROM_CART: {
+      const newItems = state.cartlist.filter(
+        (item) => item.id !== action.payload
+      );
+      return {
+        ...state,
+        cartlist: [...state, newItems],
+      };
+    }
+
+    case USER_ACTION_TYPES.DEL_ALL_FROM_CART: {
+      return {
+        ...state,
+        cartlist: [],
+      };
     }
     // case USER_ACTION_TYPES.USERS_CART:
     // return {

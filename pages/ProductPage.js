@@ -7,7 +7,11 @@ import UserLayout from '../layout/UserLayout';
 import { selectProductReducer } from '../store/product/product.selector';
 import { selectUserReducer } from '../store/user/user.selector';
 import { productScrapAsync } from '../store/product/product.action';
-import { addtocart } from '../store/user/user.action';
+import {
+  addtocart,
+  delallfromcart,
+  delfromcart,
+} from '../store/user/user.action';
 //   // userLoginStart,
 //   // userLoginSuccess,
 //   // userLoginFailure,
@@ -28,11 +32,8 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const [productData, setproductData] = useState([]);
   const [listData, setlistData] = useState([]);
-//experiment:
-const { cartlist } = useSelector(selectUserReducer);
-
-
-
+  //experiment:
+  const { cartlist } = useSelector(selectUserReducer);
 
   // useEffect(() => {
   //   // await
@@ -46,7 +47,7 @@ const { cartlist } = useSelector(selectUserReducer);
   //     });
   // }, []);
   useEffect(() => {
-     setlistData(cartlist);
+    setlistData(cartlist);
   }, [cartlist]);
 
   useEffect(() => {
@@ -59,6 +60,14 @@ const { cartlist } = useSelector(selectUserReducer);
 
   const addCartHandler = (post) => {
     dispatch(addtocart(post));
+  };
+
+  const delCartHandler = (post) => {
+    dispatch(delfromcart(post));
+  };
+
+  const delallCartHandler = () => {
+    dispatch(delallfromcart());
   };
 
   return (
@@ -97,10 +106,11 @@ const { cartlist } = useSelector(selectUserReducer);
         );
       })}
 
-<div className='flex justify-center text-[30px] font-bold'>
-        products added to cartList
-      </div>
-      {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
+      <div>
+        <div className='container flex justify-center text-[30px] font-bold'>
+          products added to cartList
+        </div>
+        {/* <button className='bg-red-700 h-10 w-60 ' onClick={check}>
             {loading?'loading':'Log In My Account'}
             you want to see products
           </button> */}
@@ -108,20 +118,35 @@ const { cartlist } = useSelector(selectUserReducer);
           const { id, title, price, description } = post;
           return (
             <div
-              className='container mx-auto flex flex-col gap-10 justify-center'
+              className='container mx-auto flex flex-col gap-5 justify-center'
               key={post.id}
             >
               <h1 className='text-[30px] font-bold'>Product {post.id}</h1>
               <p>Title: {post.title}</p>
               <p>Description: {post.description}</p>
               <p>Price: {post.price}</p>
+              <button
+                className='mx-auto flex bg-blue-700 px-2 py-1'
+                onClick={() => delCartHandler(post)}
+              >
+                Delete item
+              </button>
             </div>
           );
         })}
 
+        <div>
+          <button
+            className='mx-auto flex bg-blue-700 px-5 py-1 my-2'
+            onClick={() => delallCartHandler()}
+          >
+            clear All Cart Items
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-ProductPage.Layout=UserLayout;
+ProductPage.Layout = UserLayout;
 export default ProductPage;
