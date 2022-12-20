@@ -45,7 +45,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       );
       return {
         ...state,
-        cartlist: [newItems],
+        cartlist: newItems,
       };
     }
 
